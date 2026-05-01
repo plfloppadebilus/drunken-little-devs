@@ -13,7 +13,6 @@
             overflow: hidden;
         }
 
-        /* 🎬 INTRO */
         #intro {
             position: fixed;
             width: 100%;
@@ -38,7 +37,6 @@
             to { text-shadow: 0 0 30px red; }
         }
 
-        /* 🎮 MAIN */
         #main {
             display: none;
             background: radial-gradient(circle, #200000, #000000);
@@ -94,18 +92,15 @@
 
 <body>
 
-<!-- 🎬 INTRO -->
 <div id="intro">
     <h1>☭ Drunken Little Devs ☭</h1>
     <p>Kliknij aby rozpocząć</p>
 </div>
 
-<!-- 🔊 AUDIO -->
 <audio id="bg-music" loop preload="auto">
     <source src="./music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 🎮 MAIN -->
 <div id="main">
     <div class="flag">☭</div>
 
@@ -121,6 +116,11 @@
 
         <br><br>
 
+        <!-- ⏳ TIMER -->
+        <h2 id="countdown">Loading...</h2>
+
+        <br>
+
         <a href="https://discord.gg/TWOJ_LINK" target="_blank">
             <button class="btn">💬 Discord</button>
         </a>
@@ -134,7 +134,6 @@
 <script>
 let music = document.getElementById("bg-music");
 
-// 🎬 START (TO JEST KLUCZ DO AUDIO)
 document.getElementById("intro").addEventListener("click", function () {
     document.getElementById("intro").style.display = "none";
     document.getElementById("main").style.display = "block";
@@ -151,7 +150,6 @@ document.getElementById("intro").addEventListener("click", function () {
     }
 });
 
-// ⏸ toggle
 function toggleMusic() {
     if (music.paused) {
         music.play();
@@ -160,7 +158,6 @@ function toggleMusic() {
     }
 }
 
-// 🎮 fake download
 function fakeDownload() {
     let bar = document.getElementById("bar");
     let progress = 0;
@@ -171,10 +168,33 @@ function fakeDownload() {
 
         if (progress >= 100) {
             clearInterval(interval);
-            alert("Game not ready yet ☭");
+            alert("Game Will Be Available On 2nd May 4PM ☭");
         }
     }, 200);
 }
+
+// ⏳ COUNTDOWN
+function updateCountdown() {
+    const targetDate = new Date("May 2, 2026 16:00:00").getTime();
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "🔥 GAME IS OUT NOW!";
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+        `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
 </script>
 
 </body>
