@@ -6,67 +6,54 @@
     <style>
         body {
             margin: 0;
-            background: linear-gradient(to bottom, #8b0000, black);
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0000, #660000);
             color: white;
-            font-family: Arial;
             text-align: center;
+        }
+
+        .container {
+            margin-top: 100px;
         }
 
         h1 {
             font-size: 50px;
-            margin-top: 40px;
+            margin-bottom: 10px;
         }
 
         p {
             font-size: 20px;
+            opacity: 0.8;
         }
 
-        .box {
-            margin-top: 50px;
-        }
-
-        button {
-            background-color: red;
-            border: none;
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
             padding: 15px 30px;
             font-size: 18px;
             color: white;
+            background: #ff0000;
+            border: none;
             border-radius: 10px;
-            cursor: pointer;
-            margin: 10px;
+            text-decoration: none;
             transition: 0.3s;
         }
 
-        button:hover {
-            background-color: darkred;
+        .btn:hover {
+            background: #cc0000;
             transform: scale(1.1);
-        }
-
-        img {
-            margin-top: 30px;
-            border-radius: 15px;
-            width: 400px;
-        }
-
-        .logo {
-            font-size: 80px;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="logo">☭</div>
-
-    <h1>Drunken Little Devs</h1>
+<div class="container">
+    <h1>Drunken Little Devs 🍻</h1>
     <p>My First Communism 🔥</p>
 
-    <img src="menu.png">
-
-    <div class="box">
-        <button>PLAY</button>
-        <button>DOWNLOAD</button>
-    </div>
+    <a class="btn" href="#">Play Game</a>
+</div>
 
 </body>
 </html>
