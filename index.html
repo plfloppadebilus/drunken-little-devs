@@ -1,47 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Drunken Little Devs</title>
+<style>
+    body {
+        background: radial-gradient(circle at top left, #1a1a1a, #000);
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+        text-align: center;
+        margin: 0;
+    }
 
-    <style>
-        body {
-            background: linear-gradient(135deg, #1a1a1a, #3a0000);
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+    .box {
+        background: rgba(20, 0, 0, 0.8);
+        padding: 50px;
+        margin: 100px auto;
+        width: 60%;
+        border-radius: 25px;
+        box-shadow: 0 0 40px red;
+        transition: 0.3s;
+    }
 
-        h1 {
-            font-size: 50px;
-            margin-top: 100px;
-            color: #ff4444;
-        }
+    .box:hover {
+        box-shadow: 0 0 80px red;
+        transform: scale(1.02);
+    }
 
-        p {
-            font-size: 20px;
-            opacity: 0.8;
-        }
+    h1 {
+        font-size: 48px;
+        color: #ff3c3c;
+        margin-bottom: 10px;
+    }
 
-        .box {
-            background: rgba(0,0,0,0.5);
-            padding: 40px;
-            margin: 50px auto;
-            width: 60%;
-            border-radius: 20px;
-            box-shadow: 0 0 20px red;
-        }
-    </style>
+    p {
+        opacity: 0.7;
+        font-size: 18px;
+    }
 
-</head>
+    .btn {
+        margin-top: 20px;
+        padding: 12px 25px;
+        background: red;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
 
-<body>
-
-<div class="box">
-    <h1>🍺 Drunken Little Devs</h1>
-    <p>My First Communism 🔥</p>
-</div>
-
-</body>
-</html>
+    .btn:hover {
+        background: #ff5555;
+        transform: scale(1.1);
+    }
+</style>
