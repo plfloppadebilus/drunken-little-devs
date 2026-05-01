@@ -33,10 +33,6 @@
             animation: glow 1s infinite alternate;
         }
 
-        #intro p {
-            opacity: 0.6;
-        }
-
         @keyframes glow {
             from { text-shadow: 0 0 10px red; }
             to { text-shadow: 0 0 30px red; }
@@ -53,14 +49,6 @@
         .flag {
             font-size: 120px;
             color: red;
-            margin-top: 30px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
         }
 
         .box {
@@ -84,12 +72,10 @@
             border-radius: 10px;
             color: white;
             cursor: pointer;
-            transition: 0.2s;
         }
 
         .btn:hover {
             background: darkred;
-            transform: scale(1.1);
         }
 
         #bar {
@@ -111,15 +97,15 @@
 <!-- 🎬 INTRO -->
 <div id="intro">
     <h1>☭ Drunken Little Devs ☭</h1>
-    <p>Click to start</p>
+    <p>Kliknij aby rozpocząć</p>
 </div>
 
 <!-- 🔊 AUDIO -->
-<audio id="bg-music" loop>
-    <source src="music.mp3" type="audio/mpeg">
+<audio id="bg-music" loop preload="auto">
+    <source src="./music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 🎮 MAIN MENU -->
+<!-- 🎮 MAIN -->
 <div id="main">
     <div class="flag">☭</div>
 
@@ -130,13 +116,13 @@
 
         <br><br>
 
-        <button class="btn" onclick="fakeDownload()">⬇ Download Game</button>
+        <button class="btn" onclick="fakeDownload()">⬇ Download</button>
         <div id="bar"></div>
 
         <br><br>
 
         <a href="https://discord.gg/TWOJ_LINK" target="_blank">
-            <button class="btn">💬 Join Discord</button>
+            <button class="btn">💬 Discord</button>
         </a>
     </div>
 
@@ -148,16 +134,24 @@
 <script>
 let music = document.getElementById("bg-music");
 
-// 🎬 START GRY (intro → menu)
-document.getElementById("intro").addEventListener("click", function() {
+// 🎬 START (TO JEST KLUCZ DO AUDIO)
+document.getElementById("intro").addEventListener("click", function () {
     document.getElementById("intro").style.display = "none";
     document.getElementById("main").style.display = "block";
 
-    // 🔊 muzyka startuje (działa bo klik)
-    music.play();
+    music.muted = false;
+    music.volume = 1;
+
+    let playPromise = music.play();
+
+    if (playPromise !== undefined) {
+        playPromise.catch(() => {
+            alert("Kliknij jeszcze raz 😄");
+        });
+    }
 });
 
-// ⏸ pauza/wznów
+// ⏸ toggle
 function toggleMusic() {
     if (music.paused) {
         music.play();
