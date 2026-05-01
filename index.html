@@ -6,32 +6,74 @@
     <style>
         body {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(-45deg, #000000, #2b0000, #000000, #3a0000);
-            background-size: 400% 400%;
-            animation: bgMove 10s infinite;
+            font-family: Arial, sans-serif;
+            background: black;
             color: white;
             text-align: center;
+            overflow: hidden;
         }
 
-        @keyframes bgMove {
-            0% { background-position: 0% }
-            50% { background-position: 100% }
-            100% { background-position: 0% }
+        /* 🎬 INTRO */
+        #intro {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        #intro h1 {
+            font-size: 60px;
+            color: red;
+            animation: glow 1s infinite alternate;
+        }
+
+        #intro p {
+            opacity: 0.6;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px red; }
+            to { text-shadow: 0 0 30px red; }
+        }
+
+        /* 🎮 MAIN */
+        #main {
+            display: none;
+            background: radial-gradient(circle, #200000, #000000);
+            height: 100vh;
+            overflow: auto;
+        }
+
+        .flag {
+            font-size: 120px;
+            color: red;
+            margin-top: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         .box {
-            background: rgba(20, 0, 0, 0.8);
-            padding: 50px;
-            margin: 80px auto;
+            background: rgba(30, 0, 0, 0.9);
+            padding: 40px;
+            margin: 40px auto;
             width: 60%;
-            border-radius: 25px;
-            box-shadow: 0 0 40px red;
+            border-radius: 20px;
+            box-shadow: 0 0 50px red;
         }
 
-        h1 {
-            font-size: 50px;
-            color: #ff3c3c;
+        h2 {
+            color: red;
         }
 
         .btn {
@@ -41,12 +83,13 @@
             border: none;
             border-radius: 10px;
             color: white;
-            font-size: 16px;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .btn:hover {
-            background: #ff5555;
+            background: darkred;
+            transform: scale(1.1);
         }
 
         #bar {
@@ -57,58 +100,65 @@
         }
 
         .footer {
-            margin-top: 100px;
+            margin-top: 50px;
             opacity: 0.6;
-            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
 
+<!-- 🎬 INTRO -->
+<div id="intro">
+    <h1>☭ Drunken Little Devs ☭</h1>
+    <p>Click to start</p>
+</div>
+
 <!-- 🔊 AUDIO -->
 <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="box">
-    <h1>🍺 Drunken Little Devs</h1>
-    <p>My First Communism 🔥</p>
+<!-- 🎮 MAIN MENU -->
+<div id="main">
+    <div class="flag">☭</div>
 
-    <!-- 🎵 MUZYKA -->
-    <button class="btn" onclick="startMusic()">▶ Start Music</button>
-    <button class="btn" onclick="toggleMusic()">⏸ Pause / Resume</button>
+    <div class="box">
+        <h2>My First Communism</h2>
 
-    <br><br>
+        <button class="btn" onclick="toggleMusic()">⏸ Music</button>
 
-    <!-- 🎮 DOWNLOAD -->
-    <button class="btn" onclick="fakeDownload()">⬇ Download Game</button>
-    <div id="bar"></div>
+        <br><br>
 
-    <br><br>
+        <button class="btn" onclick="fakeDownload()">⬇ Download Game</button>
+        <div id="bar"></div>
 
-    <!-- 💬 DISCORD -->
-    <a href="https://discord.gg/TjzUzgvy" target="_blank">
-        <button class="btn">💬 Join Discord</button>
-    </a>
+        <br><br>
+
+        <a href="https://discord.gg/TWOJ_LINK" target="_blank">
+            <button class="btn">💬 Join Discord</button>
+        </a>
+    </div>
+
+    <div class="footer">
+        Created by <b>FloppaDev</b> ☭
+    </div>
 </div>
 
-<!-- 👤 CREDITS -->
-<div class="footer">
-    Created by <b>FloppaDev</b> 🍻
-</div>
-
-<!-- 🧠 SCRIPT -->
 <script>
-function startMusic() {
-    let music = document.getElementById("bg-music");
-    music.play().catch(() => {
-        alert("Kliknij jeszcze raz 😄");
-    });
-}
+let music = document.getElementById("bg-music");
 
+// 🎬 START GRY (intro → menu)
+document.getElementById("intro").addEventListener("click", function() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("main").style.display = "block";
+
+    // 🔊 muzyka startuje (działa bo klik)
+    music.play();
+});
+
+// ⏸ pauza/wznów
 function toggleMusic() {
-    let music = document.getElementById("bg-music");
     if (music.paused) {
         music.play();
     } else {
@@ -116,17 +166,18 @@ function toggleMusic() {
     }
 }
 
+// 🎮 fake download
 function fakeDownload() {
     let bar = document.getElementById("bar");
     let progress = 0;
 
-    let interval = setInterval(function() {
+    let interval = setInterval(() => {
         progress += 5;
         bar.style.width = progress + "%";
 
         if (progress >= 100) {
             clearInterval(interval);
-            alert("Game not ready yet 💀");
+            alert("Game not ready yet ☭");
         }
     }, 200);
 }
