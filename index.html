@@ -20,25 +20,6 @@
             100% { background-position: 0% }
         }
 
-        .navbar {
-            background: rgba(0,0,0,0.8);
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            box-shadow: 0 0 20px red;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .navbar a:hover {
-            color: red;
-        }
-
         .box {
             background: rgba(20, 0, 0, 0.8);
             padding: 50px;
@@ -46,12 +27,6 @@
             width: 60%;
             border-radius: 25px;
             box-shadow: 0 0 40px red;
-            transition: 0.3s;
-        }
-
-        .box:hover {
-            box-shadow: 0 0 80px red;
-            transform: scale(1.02);
         }
 
         h1 {
@@ -59,13 +34,8 @@
             color: #ff3c3c;
         }
 
-        p {
-            opacity: 0.7;
-            font-size: 18px;
-        }
-
         .btn {
-            margin-top: 15px;
+            margin-top: 10px;
             padding: 12px 25px;
             background: red;
             border: none;
@@ -73,66 +43,69 @@
             color: white;
             font-size: 16px;
             cursor: pointer;
-            transition: 0.2s;
         }
 
         .btn:hover {
             background: #ff5555;
-            transform: scale(1.1);
         }
 
-        .section {
+        #bar {
+            width: 0%;
+            height: 20px;
+            background: red;
+            margin-top: 10px;
+        }
+
+        .footer {
             margin-top: 100px;
+            opacity: 0.6;
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
 
-<!-- 🔊 MUZYKA -->
+<!-- 🔊 AUDIO -->
 <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 🔝 NAVBAR -->
-<div class="navbar">
-    <a href="#">Home</a>
-    <a href="#">Games</a>
-    <a href="#">Discord</a>
-</div>
-
-<!-- 🔥 MAIN -->
 <div class="box">
     <h1>🍺 Drunken Little Devs</h1>
     <p>My First Communism 🔥</p>
 
-    <button class="btn" onclick="alert('WELCOME 🍻')">Join the Chaos</button>
-    <br>
-    <button class="btn" onclick="toggleMusic()">🎵 Music</button>
+    <!-- 🎵 MUZYKA -->
+    <button class="btn" onclick="startMusic()">▶ Start Music</button>
+    <button class="btn" onclick="toggleMusic()">⏸ Pause / Resume</button>
+
+    <br><br>
+
+    <!-- 🎮 DOWNLOAD -->
+    <button class="btn" onclick="fakeDownload()">⬇ Download Game</button>
+    <div id="bar"></div>
+
+    <br><br>
+
+    <!-- 💬 DISCORD -->
+    <a href="https://discord.gg/TjzUzgvy" target="_blank">
+        <button class="btn">💬 Join Discord</button>
+    </a>
 </div>
 
-<!-- 🎮 GAMES -->
-<div class="section">
-    <h2>🎮 Our Games</h2>
-    <p>Coming soon... probably broken 😎</p>
-</div>
-
-<!-- 💬 FOOTER -->
-<div class="section">
-    <p>© 2026 Drunken Little Devs</p>
+<!-- 👤 CREDITS -->
+<div class="footer">
+    Created by <b>FloppaDev</b> 🍻
 </div>
 
 <!-- 🧠 SCRIPT -->
 <script>
-let musicStarted = false;
-
-document.addEventListener("click", function() {
+function startMusic() {
     let music = document.getElementById("bg-music");
-    if (!musicStarted) {
-        music.play();
-        musicStarted = true;
-    }
-});
+    music.play().catch(() => {
+        alert("Kliknij jeszcze raz 😄");
+    });
+}
 
 function toggleMusic() {
     let music = document.getElementById("bg-music");
@@ -141,6 +114,21 @@ function toggleMusic() {
     } else {
         music.pause();
     }
+}
+
+function fakeDownload() {
+    let bar = document.getElementById("bar");
+    let progress = 0;
+
+    let interval = setInterval(function() {
+        progress += 5;
+        bar.style.width = progress + "%";
+
+        if (progress >= 100) {
+            clearInterval(interval);
+            alert("Game not ready yet 💀");
+        }
+    }, 200);
 }
 </script>
 
