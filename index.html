@@ -1,52 +1,148 @@
-<style>
-    body {
-        background: radial-gradient(circle at top left, #1a1a1a, #000);
-        color: white;
-        font-family: 'Segoe UI', sans-serif;
-        text-align: center;
-        margin: 0;
-    }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drunken Little Devs</title>
 
-    .box {
-        background: rgba(20, 0, 0, 0.8);
-        padding: 50px;
-        margin: 100px auto;
-        width: 60%;
-        border-radius: 25px;
-        box-shadow: 0 0 40px red;
-        transition: 0.3s;
-    }
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(-45deg, #000000, #2b0000, #000000, #3a0000);
+            background-size: 400% 400%;
+            animation: bgMove 10s infinite;
+            color: white;
+            text-align: center;
+        }
 
-    .box:hover {
-        box-shadow: 0 0 80px red;
-        transform: scale(1.02);
-    }
+        @keyframes bgMove {
+            0% { background-position: 0% }
+            50% { background-position: 100% }
+            100% { background-position: 0% }
+        }
 
-    h1 {
-        font-size: 48px;
-        color: #ff3c3c;
-        margin-bottom: 10px;
-    }
+        .navbar {
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            box-shadow: 0 0 20px red;
+        }
 
-    p {
-        opacity: 0.7;
-        font-size: 18px;
-    }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-    .btn {
-        margin-top: 20px;
-        padding: 12px 25px;
-        background: red;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.2s;
-    }
+        .navbar a:hover {
+            color: red;
+        }
 
-    .btn:hover {
-        background: #ff5555;
-        transform: scale(1.1);
+        .box {
+            background: rgba(20, 0, 0, 0.8);
+            padding: 50px;
+            margin: 80px auto;
+            width: 60%;
+            border-radius: 25px;
+            box-shadow: 0 0 40px red;
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            box-shadow: 0 0 80px red;
+            transform: scale(1.02);
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #ff3c3c;
+        }
+
+        p {
+            opacity: 0.7;
+            font-size: 18px;
+        }
+
+        .btn {
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: red;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #ff5555;
+            transform: scale(1.1);
+        }
+
+        .section {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🔊 MUZYKA -->
+<audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🔝 NAVBAR -->
+<div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">Games</a>
+    <a href="#">Discord</a>
+</div>
+
+<!-- 🔥 MAIN -->
+<div class="box">
+    <h1>🍺 Drunken Little Devs</h1>
+    <p>My First Communism 🔥</p>
+
+    <button class="btn" onclick="alert('WELCOME 🍻')">Join the Chaos</button>
+    <br>
+    <button class="btn" onclick="toggleMusic()">🎵 Music</button>
+</div>
+
+<!-- 🎮 GAMES -->
+<div class="section">
+    <h2>🎮 Our Games</h2>
+    <p>Coming soon... probably broken 😎</p>
+</div>
+
+<!-- 💬 FOOTER -->
+<div class="section">
+    <p>© 2026 Drunken Little Devs</p>
+</div>
+
+<!-- 🧠 SCRIPT -->
+<script>
+let musicStarted = false;
+
+document.addEventListener("click", function() {
+    let music = document.getElementById("bg-music");
+    if (!musicStarted) {
+        music.play();
+        musicStarted = true;
     }
-</style>
+});
+
+function toggleMusic() {
+    let music = document.getElementById("bg-music");
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+</script>
+
+</body>
+</html>
