@@ -65,11 +65,19 @@
             border-radius: 10px;
             color: white;
             cursor: pointer;
-            margin: 10px;
+            font-size:16px;
         }
 
         .btn:hover {
             background: darkred;
+        }
+
+        select {
+            padding:12px;
+            border-radius:10px;
+            background:black;
+            color:white;
+            border:2px solid red;
         }
 
         #bar {
@@ -103,42 +111,76 @@
 
         <br><br>
 
-        <button class="btn" onclick="downloadGame()">⬇ Download</button>
+        <select id="versionSelect">
+            <option value="v0.1">v0.1 Stable</option>
+            <option value="v0.2">v0.1 Collab1</option>
+            <option value="beta">not now</option>
+        </select>
+
+        <br><br>
+
+        <button class="btn" onclick="downloadGame()">
+            ⬇ Download
+        </button>
 
         <div id="bar"></div>
+
+        <h3>📥 Downloads: <span id="downloads">0</span></h3>
     </div>
+
 </div>
 
 <script>
+
 let music = document.getElementById("bg-music");
 
-// intro
 document.getElementById("intro").onclick = () => {
     document.getElementById("intro").style.display = "none";
     document.getElementById("main").style.display = "block";
     music.play().catch(()=>{});
-}
+};
 
-// music
 function toggleMusic() {
     music.paused ? music.play() : music.pause();
 }
 
-// download (bez blokad)
+let downloads = localStorage.getItem("downloads") || 0;
+document.getElementById("downloads").innerText = downloads;
+
+const links = {
+    "v0.1":"TU_LINK_V0.1",
+    "v0.2":"TU_LINK_V0.2",
+    "beta":"TU_LINK_BETA"
+};
+
 function downloadGame() {
+
+    const version =
+        document.getElementById("versionSelect").value;
+
     let bar = document.getElementById("bar");
     let progress = 0;
 
     let interval = setInterval(() => {
+
         progress += 5;
         bar.style.width = progress + "%";
 
-        if (progress >= 100) {
+        if(progress >= 100){
+
             clearInterval(interval);
-            window.location.href = "https://github.com/plfloppadebilus/drunken-little-devs/releases/tag/GAME!!!";
+
+            downloads++;
+            localStorage.setItem("downloads",downloads);
+
+            document.getElementById("downloads").innerText = downloads;
+
+            window.location.href = links[version];
         }
-    }, 200);
+
+    },200);
 }
+
 </script>
 
 </body>
